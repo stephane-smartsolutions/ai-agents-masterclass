@@ -13,14 +13,14 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "iN7fO2CgatVwq73z",
+          "id": "wzg0AWHeKIOv1y9W",
           "name": "Postgres account"
         }
       }
     },
     {
       "parameters": {
-        "model": "llama3.1:latest",
+        "model": "llama3.3:latest",
         "options": {}
       },
       "id": "c7632a7c-2661-492e-bd6f-aab994818998",
@@ -33,7 +33,7 @@
       ],
       "credentials": {
         "ollamaApi": {
-          "id": "eOwAotC7AUgJlvHM",
+          "id": "feUM90BgNOBbxWXC",
           "name": "Ollama account"
         }
       }
@@ -53,7 +53,7 @@
       ],
       "credentials": {
         "ollamaApi": {
-          "id": "eOwAotC7AUgJlvHM",
+          "id": "feUM90BgNOBbxWXC",
           "name": "Ollama account"
         }
       }
@@ -86,139 +86,8 @@
       ],
       "credentials": {
         "ollamaApi": {
-          "id": "eOwAotC7AUgJlvHM",
+          "id": "feUM90BgNOBbxWXC",
           "name": "Ollama account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "triggerOn": "specificFolder",
-        "folderToWatch": {
-          "__rl": true,
-          "value": "1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC",
-          "mode": "list",
-          "cachedResultName": "Meeting Notes",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC"
-        },
-        "event": "fileCreated",
-        "options": {}
-      },
-      "id": "41fb71dd-236a-48bc-9761-5841d52ca1b3",
-      "name": "File Created",
-      "type": "n8n-nodes-base.googleDriveTrigger",
-      "typeVersion": 1,
-      "position": [
-        600,
-        880
-      ],
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "vzcL2pD7uQzqDpdK",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "triggerOn": "specificFolder",
-        "folderToWatch": {
-          "__rl": true,
-          "value": "1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC",
-          "mode": "list",
-          "cachedResultName": "Meeting Notes",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC"
-        },
-        "event": "fileUpdated",
-        "options": {}
-      },
-      "id": "7b904686-89ae-4722-9ce5-a9da1b13b1a1",
-      "name": "File Updated",
-      "type": "n8n-nodes-base.googleDriveTrigger",
-      "typeVersion": 1,
-      "position": [
-        600,
-        1100
-      ],
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "vzcL2pD7uQzqDpdK",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
-              "name": "file_id",
-              "value": "={{ $json.id }}",
-              "type": "string"
-            },
-            {
-              "id": "dd0aa081-79e7-4714-8a67-1e898285554c",
-              "name": "folder_id",
-              "value": "={{ $json.parents[0] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "87f8bbb0-92c5-4b25-be63-7a9d91fc46f8",
-      "name": "Set File ID",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        860,
-        880
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "value": "={{ $('Set File ID').item.json.file_id }}",
-          "mode": "id"
-        },
-        "options": {
-          "googleFileConversion": {
-            "conversion": {
-              "docsToFormat": "text/plain"
-            }
-          }
-        }
-      },
-      "id": "9f1e08fb-4ef3-4c4d-9473-5a7a1608b8e3",
-      "name": "Download File",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        1300,
-        880
-      ],
-      "executeOnce": true,
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "vzcL2pD7uQzqDpdK",
-          "name": "Google Drive account"
         }
       }
     },
@@ -232,8 +101,8 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1540,
-        880
+        1520,
+        1340
       ],
       "alwaysOutputData": true
     },
@@ -244,11 +113,11 @@
             "metadataValues": [
               {
                 "name": "file_id",
-                "value": "={{ $('Set File ID').item.json.file_id }}"
+                "value": "={{ $('Set Variables').item.json.file_id }}"
               },
               {
                 "name": "folder_id",
-                "value": "={{ $('Set File ID').item.json.folder_id }}"
+                "value": "={{ $('Set Variables').item.json.folder_id }}"
               }
             ]
           }
@@ -259,8 +128,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
       "position": [
-        1860,
-        1100
+        1880,
+        1560
       ]
     },
     {
@@ -273,8 +142,8 @@
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        1860,
-        1320
+        1980,
+        1760
       ]
     },
     {
@@ -286,12 +155,12 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
       "typeVersion": 1,
       "position": [
-        1700,
-        1100
+        1720,
+        1560
       ],
       "credentials": {
         "ollamaApi": {
-          "id": "eOwAotC7AUgJlvHM",
+          "id": "feUM90BgNOBbxWXC",
           "name": "Ollama account"
         }
       }
@@ -329,9 +198,9 @@
     },
     {
       "parameters": {
-        "content": "## Workflow to Create Local Knowledgebase from Google Drive Folder",
-        "height": 705.2695614889159,
-        "width": 1568.9362829025763,
+        "content": "## Workflow to Create Local Knowledgebase from Local Drive Folder",
+        "height": 1165,
+        "width": 1429,
         "color": 5
       },
       "id": "f29e6cc7-015e-47cb-a4fd-fecd6ffb0d24",
@@ -339,7 +208,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        560,
+        740,
         760
       ]
     },
@@ -377,43 +246,10 @@
       ],
       "credentials": {
         "qdrantApi": {
-          "id": "VOnegFP8eijBkbNO",
+          "id": "Y0C6WCOqj6G19Tsx",
           "name": "QdrantApi account"
         }
       }
-    },
-    {
-      "parameters": {
-        "code": {
-          "execute": {
-            "code": "const { QdrantVectorStore } = require(\"@langchain/qdrant\");\nconst { OllamaEmbeddings } = require(\"@langchain/community/embeddings/ollama\");\n\nconst embeddings = new OllamaEmbeddings({\n  model: \"nomic-embed-text\",\n  baseUrl: \"http://ollama:11434\"\n});\n\nconst vectorStore = await QdrantVectorStore.fromExistingCollection(\n  embeddings,\n  {\n    url: \"http://qdrant:6333\",\n    collectionName: \"documents\",\n  }\n);\n\nconst fileIdToDelete = this.getInputData()[0].json.file_id;\n\nconst filter = {\n        must: [\n            {\n                key: \"metadata.file_id\",\n                match: {\n                    value: fileIdToDelete,\n                },\n            },\n        ],\n    }\n\n// const results = await vectorStore.similaritySearch(\"this\", 10, filter);\n// const idsToDelete = results.map((doc) => doc.id);\n\n// NOT IMPLEMENTED!\n// await vectorStore.delete({ ids: idsToDelete });\n\nvectorStore.client.delete(\"documents\", {\n  filter\n});\n\nreturn [ {json: { file_id: fileIdToDelete } } ];\n"
-          }
-        },
-        "inputs": {
-          "input": [
-            {
-              "type": "main",
-              "required": true
-            }
-          ]
-        },
-        "outputs": {
-          "output": [
-            {
-              "type": "main"
-            }
-          ]
-        }
-      },
-      "id": "b93bd001-0c4d-42fe-939a-eb441f354917",
-      "name": "Clear Old Vectors",
-      "type": "@n8n/n8n-nodes-langchain.code",
-      "typeVersion": 1,
-      "position": [
-        1080,
-        880
-      ],
-      "alwaysOutputData": false
     },
     {
       "parameters": {
@@ -431,12 +267,12 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
       "typeVersion": 1,
       "position": [
-        1760,
-        880
+        1740,
+        1340
       ],
       "credentials": {
         "qdrantApi": {
-          "id": "VOnegFP8eijBkbNO",
+          "id": "Y0C6WCOqj6G19Tsx",
           "name": "QdrantApi account"
         }
       }
@@ -512,6 +348,392 @@
         820,
         340
       ]
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/home/smart/projects/KB",
+        "events": [
+          "add",
+          "change",
+          "unlink"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        560,
+        960
+      ],
+      "id": "8fddbf88-5188-4b0a-a5b4-144dd7c512ee",
+      "name": "Local File Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
+              "name": "file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "dd0aa081-79e7-4714-8a67-1e898285554c",
+              "name": "folder_id",
+              "value": "={{ $json.parents[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "6772e914-7cd3-4dd1-a8ad-4d1f41bb6c66",
+              "name": "file_added",
+              "value": "={{ $json.event === 'add' && $json.path || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "adc2bbd7-eac4-49f4-8fdc-85e6065bf6dc",
+              "name": "file_changed",
+              "value": "={{ $json.event === 'change' && $json.path || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "734a3b82-c20a-4acb-b8ae-7a37626b8c8b",
+              "name": "file_deleted",
+              "value": "={{ $json.event === 'unlink' && $json.path || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "9ac0f0f0-f285-4c20-8ea6-0a28de4dfd88",
+              "name": "qdrant_collection",
+              "value": "local_file_search",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "87f8bbb0-92c5-4b25-be63-7a9d91fc46f8",
+      "name": "Set Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "a1f6d86a-9805-4d0e-ac70-90c9cf0ad339",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.file_deleted }}",
+                    "rightValue": ""
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "file_deleted"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "d15cde67-b5b0-4676-b4fb-ead749147392",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.file_changed }}",
+                    "rightValue": ""
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "file_changed"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.file_added }}",
+                    "rightValue": "",
+                    "id": "3d7a5607-9601-482b-bfd8-fca0c818484b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "file_added"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e0d0860e-9f6c-4707-838b-0f440217e269",
+      "name": "Handle File Event",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        1020,
+        960
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://qdrant:6333/collections/{{ $('Set Variables').item.json.qdrant_collection }}/points/scroll",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "qdrantApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"filter\": {\n        \"must\": [\n            {\n                \"key\": \"metadata.filter_by_filename\",\n                \"match\": {\n                    \"value\": \"{{ $json.file_changed }}\"\n                }\n            }\n        ]\n    },\n    \"limit\": 1,\n    \"with_payload\": false,\n    \"with_vector\": false\n}",
+        "options": {}
+      },
+      "id": "87d51ded-710f-4650-a776-344c3aa7bb75",
+      "name": "Search For Existing Point",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1320,
+        880
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "qdrantApi": {
+          "id": "Y0C6WCOqj6G19Tsx",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://qdrant:6333/collections/{{ $('Set Variables').item.json.qdrant_collection }}/points/delete",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "qdrantApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "points",
+              "value": "={{ $json.result.points.map(point => point.id) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3492f861-4269-4fe9-ac14-29b4b4e85944",
+      "name": "Delete Existing Point1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1720,
+        880
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "qdrantApi": {
+          "id": "Y0C6WCOqj6G19Tsx",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "0392bac0-8fb5-406b-b59f-575edf5ab30d",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.result.points }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "07d3c7d5-979a-4167-af49-af5091cc3158",
+      "name": "Has Existing Point?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1500,
+        880
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://qdrant:6333/collections/{{ $('Set Variables').item.json.qdrant_collection }}/points/scroll",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "qdrantApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"filter\": {\n        \"must\": [\n            {\n                \"key\": \"metadata.filter_by_filename\",\n                \"match\": {\n                    \"value\": \"{{ $json.file_changed }}\"\n                }\n            }\n        ]\n    },\n    \"limit\": 1,\n    \"with_payload\": false,\n    \"with_vector\": false\n}",
+        "options": {}
+      },
+      "id": "a7bceb6d-1ee9-40a5-a059-fcb9cfaa8d42",
+      "name": "Search For Existing Point1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1320,
+        1080
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "qdrantApi": {
+          "id": "Y0C6WCOqj6G19Tsx",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://qdrant:6333/collections/{{ $('Set Variables').item.json.qdrant_collection }}/points/delete",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "qdrantApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "points",
+              "value": "={{ $json.result.points.map(point => point.id) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "074df9e2-297a-4421-b327-5bd588ec3b59",
+      "name": "Delete Existing Point",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1720,
+        1080
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "qdrantApi": {
+          "id": "Y0C6WCOqj6G19Tsx",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "0392bac0-8fb5-406b-b59f-575edf5ab30d",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.result.points }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "9ea81a3e-c205-4b3b-be33-8921609d6ec5",
+      "name": "Has Existing Point?1",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1500,
+        1080
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "840219e1-ed47-4b00-83fd-6b3c0bd71650",
+              "name": "file_added",
+              "type": "string",
+              "value": "={{ $('Set Variables').item.json.file_changed }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e0f19cf0-576f-4dda-8b51-3bb137574b64",
+      "name": "Remap for File_Added Flow",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1920,
+        1080
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.file_added }}",
+        "options": {}
+      },
+      "id": "6a72a0c3-32c6-4058-b54d-67f6529364ea",
+      "name": "Read File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "position": [
+        1320,
+        1340
+      ],
+      "typeVersion": 1
     }
   ],
   "pinData": {},
@@ -555,50 +777,6 @@
           {
             "node": "Qdrant Vector Store",
             "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "File Created": {
-      "main": [
-        [
-          {
-            "node": "Set File ID",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "File Updated": {
-      "main": [
-        [
-          {
-            "node": "Set File ID",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set File ID": {
-      "main": [
-        [
-          {
-            "node": "Clear Old Vectors",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download File": {
-      "main": [
-        [
-          {
-            "node": "Extract Document Text",
-            "type": "main",
             "index": 0
           }
         ]
@@ -670,17 +848,6 @@
         ]
       ]
     },
-    "Clear Old Vectors": {
-      "main": [
-        [
-          {
-            "node": "Download File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Webhook": {
       "main": [
         [
@@ -724,16 +891,141 @@
           }
         ]
       ]
+    },
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "Handle File Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search For Existing Point": {
+      "main": [
+        [
+          {
+            "node": "Has Existing Point?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Handle File Event": {
+      "main": [
+        [
+          {
+            "node": "Search For Existing Point",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Search For Existing Point1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Read File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Existing Point?": {
+      "main": [
+        [
+          {
+            "node": "Delete Existing Point1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Search For Existing Point1": {
+      "main": [
+        [
+          {
+            "node": "Has Existing Point?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Existing Point?1": {
+      "main": [
+        [
+          {
+            "node": "Delete Existing Point",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Existing Point": {
+      "main": [
+        [
+          {
+            "node": "Remap for File_Added Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remap for File_Added Flow": {
+      "main": [
+        [
+          {
+            "node": "Read File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read File": {
+      "main": [
+        [
+          {
+            "node": "Extract Document Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "19f9691c-4682-4704-81f2-33fdec9d0be2",
+  "versionId": "9cdc6d30-a493-4755-a062-3e716b1f59ad",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "f722e3e1e81e942a38faa434ad0aee8699371bbff9f883b9d5c59a7c726605af"
+    "instanceId": "e15678efd8b505c933855d307e27ebe2818e717becdde5b4ca6ac5bf0502becc"
   },
   "id": "vTN9y2dLXqTiDfPT",
   "tags": []
