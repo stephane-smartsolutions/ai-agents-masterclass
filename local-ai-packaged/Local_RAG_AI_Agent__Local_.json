@@ -113,7 +113,7 @@
             "metadataValues": [
               {
                 "name": "filter_by_filename",
-                "value": "={{ $json.file_added }}"
+                "value": "={{ $json.path }}"
               }
             ]
           }
@@ -723,6 +723,58 @@
         1120
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "category": "doNothing"
+      },
+      "type": "n8n-nodes-base.debugHelper",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        1560
+      ],
+      "id": "7300bd53-f9a0-4716-94bb-624938355b3e",
+      "name": "DebugHelper"
+    },
+    {
+      "parameters": {
+        "category": "doNothing"
+      },
+      "type": "n8n-nodes-base.debugHelper",
+      "typeVersion": 1,
+      "position": [
+        600,
+        560
+      ],
+      "id": "c388d402-da10-43d4-b21e-ea930fe7c885",
+      "name": "DebugHelper1"
+    },
+    {
+      "parameters": {
+        "category": "doNothing"
+      },
+      "type": "n8n-nodes-base.debugHelper",
+      "typeVersion": 1,
+      "position": [
+        1540,
+        1120
+      ],
+      "id": "28a31f5d-2a83-40b1-b5bc-d3d5c1607fe6",
+      "name": "DebugHelper2"
+    },
+    {
+      "parameters": {
+        "category": "doNothing"
+      },
+      "type": "n8n-nodes-base.debugHelper",
+      "typeVersion": 1,
+      "position": [
+        720,
+        1560
+      ],
+      "id": "4333008b-f144-4af9-a15e-c0572e32c193",
+      "name": "DebugHelper3"
     }
   ],
   "pinData": {},
@@ -776,6 +828,11 @@
         [
           {
             "node": "Qdrant Vector Store Insert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DebugHelper",
             "type": "main",
             "index": 0
           }
@@ -921,6 +978,11 @@
             "node": "Search For Existing Point",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "DebugHelper1",
+            "type": "main",
+            "index": 0
           }
         ],
         [
@@ -1001,6 +1063,27 @@
             "node": "Extract Document Text",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "DebugHelper3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DebugHelper": {
+      "main": [
+        []
+      ]
+    },
+    "Qdrant Vector Store Insert": {
+      "main": [
+        [
+          {
+            "node": "DebugHelper2",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -1010,7 +1093,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "88c7bb39-8c21-4556-afca-7f97ef74a4ea",
+  "versionId": "856c2f0f-fd46-4a68-8999-b6013d68d626",
   "meta": {
     "instanceId": "e15678efd8b505c933855d307e27ebe2818e717becdde5b4ca6ac5bf0502becc"
   },
