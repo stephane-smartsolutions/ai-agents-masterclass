@@ -118,7 +118,7 @@ services:
     volumes:
       - n8n_storage:/home/node/.n8n
       - ./n8n/backup:/backup
-      - ./shared:/data/shared:delegated
+      - /home/smart/projects/KB/rag_01:/data/shared:delegated
     depends_on:
       postgres:
         condition: service_healthy
