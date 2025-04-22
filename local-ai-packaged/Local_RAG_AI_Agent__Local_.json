@@ -511,7 +511,7 @@
             {}
           ]
         },
-        "jsonBody": "=\"jsonBody\": \"={\\n    \\\"filter\\\": {\\n        \\\"must\\\": [\\n            {\\n                \\\"key\\\": \\\"metadata.filter_by_filename\\\",\\n                \\\"match\\\": {\\n                    \\\"value\\\": \\\"{{ $json.file_deleted }}\\\"\\n                }\\n            }\\n        ]\\n    },...\"\n",
+        "jsonBody": "={\n  \"filter\": {\n    \"must\": [\n      {\n        \"key\": \"metadata.filter_by_filename\",\n        \"match\": {\n          \"value\": \"{{ $json.file_deleted }}\"\n        }\n      }\n    ]\n  }\n}\n",
         "options": {}
       },
       "id": "b580ef4b-9648-4535-b9be-bbb532195366",
@@ -603,7 +603,7 @@
         "nodeCredentialType": "qdrantApi",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "=\"jsonBody\": \"={\\n    \\\"filter\\\": {\\n        \\\"must\\\": [\\n            {\\n                \\\"key\\\": \\\"metadata.filter_by_filename\\\",\\n                \\\"match\\\": {\\n                    \\\"value\\\": \\\"{{ $json.file_changed }}\\\"\\n                }\\n            }\\n        ]\\n    },...\"\n",
+        "jsonBody": "={\n  \"filter\": {\n    \"must\": [\n      {\n        \"key\": \"metadata.filter_by_filename\",\n        \"match\": {\n          \"value\": \"{{ $json.file_changed }}\"\n        }\n      }\n    ]\n  }\n}\n",
         "options": {}
       },
       "id": "204de4e8-e759-4d0c-9188-d74254160446",
@@ -1010,7 +1010,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "614e64b3-12e2-4a4c-bb60-c795c14e3f46",
+  "versionId": "88c7bb39-8c21-4556-afca-7f97ef74a4ea",
   "meta": {
     "instanceId": "e15678efd8b505c933855d307e27ebe2818e717becdde5b4ca6ac5bf0502becc"
   },
