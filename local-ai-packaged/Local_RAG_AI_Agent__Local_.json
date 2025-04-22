@@ -40,7 +40,7 @@
     },
     {
       "parameters": {
-        "model": "llama3.1:latest",
+        "model": "llama3.3:latest",
         "options": {}
       },
       "id": "66cb2bde-e503-46a7-8242-5f83693f16cc",
@@ -74,7 +74,7 @@
     },
     {
       "parameters": {
-        "model": "nomic-embed-text:latest"
+        "model": "bge-large:latest"
       },
       "id": "e323955e-3898-455e-81f4-3b7e9ec7d503",
       "name": "Embeddings Ollama",
@@ -101,7 +101,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        960,
+        1000,
         1120
       ],
       "alwaysOutputData": true
@@ -113,7 +113,7 @@
             "metadataValues": [
               {
                 "name": "filter_by_filename",
-                "value": "={{ $json.path }}"
+                "value": "={{ $('Set Variables').item.json.file_to_read }}"
               }
             ]
           }
@@ -124,7 +124,7 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
       "position": [
-        1320,
+        1360,
         1340
       ]
     },
@@ -138,20 +138,20 @@
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        1420,
+        1460,
         1540
       ]
     },
     {
       "parameters": {
-        "model": "nomic-embed-text:latest"
+        "model": "bge-large:latest"
       },
       "id": "3b2256dc-69d5-46c7-b3ba-deaec2741ba0",
       "name": "Embeddings Ollama1",
       "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
       "typeVersion": 1,
       "position": [
-        1160,
+        1200,
         1340
       ],
       "credentials": {
@@ -196,7 +196,7 @@
       "parameters": {
         "content": "## Workflow to Create Local Knowledgebase from Local Drive Folder",
         "height": 1165,
-        "width": 1429,
+        "width": 1489,
         "color": 5
       },
       "id": "dffca6d1-9a98-47e7-b1b1-bcc28ca4b6d2",
@@ -263,7 +263,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
       "typeVersion": 1,
       "position": [
-        1180,
+        1220,
         1120
       ],
       "credentials": {
@@ -391,6 +391,12 @@
               "id": "9ac0f0f0-f285-4c20-8ea6-0a28de4dfd88",
               "name": "qdrant_collection",
               "value": "documents",
+              "type": "string"
+            },
+            {
+              "id": "d43ec914-09d1-4691-a4da-58fcbafd71ff",
+              "name": "file_to_read",
+              "value": "={{ $json.path }}",
               "type": "string"
             }
           ]
@@ -689,92 +695,18 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "840219e1-ed47-4b00-83fd-6b3c0bd71650",
-              "name": "file_added",
-              "type": "string",
-              "value": "={{ $('Set Variables').item.json.file_changed }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "4f41dc3c-2138-4ea0-a970-bd79ed04c56a",
-      "name": "Remap for File_Added Flow",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        1360,
-        860
-      ],
-      "typeVersion": 3.3
-    },
-    {
-      "parameters": {
-        "fileSelector": "={{ $json.file_added }}",
+        "fileSelector": "={{ $('Set Variables').item.json.file_to_read }}",
         "options": {}
       },
       "id": "77a85169-a084-4801-a1b2-982965657414",
       "name": "Read File",
       "type": "n8n-nodes-base.readWriteFile",
       "position": [
-        760,
+        740,
         1120
       ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "category": "doNothing"
-      },
-      "type": "n8n-nodes-base.debugHelper",
       "typeVersion": 1,
-      "position": [
-        1040,
-        1560
-      ],
-      "id": "7300bd53-f9a0-4716-94bb-624938355b3e",
-      "name": "DebugHelper"
-    },
-    {
-      "parameters": {
-        "category": "doNothing"
-      },
-      "type": "n8n-nodes-base.debugHelper",
-      "typeVersion": 1,
-      "position": [
-        600,
-        560
-      ],
-      "id": "c388d402-da10-43d4-b21e-ea930fe7c885",
-      "name": "DebugHelper1"
-    },
-    {
-      "parameters": {
-        "category": "doNothing"
-      },
-      "type": "n8n-nodes-base.debugHelper",
-      "typeVersion": 1,
-      "position": [
-        1540,
-        1120
-      ],
-      "id": "28a31f5d-2a83-40b1-b5bc-d3d5c1607fe6",
-      "name": "DebugHelper2"
-    },
-    {
-      "parameters": {
-        "category": "doNothing"
-      },
-      "type": "n8n-nodes-base.debugHelper",
-      "typeVersion": 1,
-      "position": [
-        720,
-        1560
-      ],
-      "id": "4333008b-f144-4af9-a15e-c0572e32c193",
-      "name": "DebugHelper3"
+      "alwaysOutputData": false
     }
   ],
   "pinData": {},
@@ -828,11 +760,6 @@
         [
           {
             "node": "Qdrant Vector Store Insert",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "DebugHelper",
             "type": "main",
             "index": 0
           }
@@ -978,11 +905,6 @@
             "node": "Search For Existing Point",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "DebugHelper1",
-            "type": "main",
-            "index": 0
           }
         ],
         [
@@ -1038,17 +960,6 @@
       "main": [
         [
           {
-            "node": "Remap for File_Added Flow",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Remap for File_Added Flow": {
-      "main": [
-        [
-          {
             "node": "Read File",
             "type": "main",
             "index": 0
@@ -1063,29 +974,13 @@
             "node": "Extract Document Text",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "DebugHelper3",
-            "type": "main",
-            "index": 0
           }
         ]
-      ]
-    },
-    "DebugHelper": {
-      "main": [
-        []
       ]
     },
     "Qdrant Vector Store Insert": {
       "main": [
-        [
-          {
-            "node": "DebugHelper2",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -1093,7 +988,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "856c2f0f-fd46-4a68-8999-b6013d68d626",
+  "versionId": "f6e40ce2-67df-49c7-af90-4f7e36799e60",
   "meta": {
     "instanceId": "e15678efd8b505c933855d307e27ebe2818e717becdde5b4ca6ac5bf0502becc"
   },
